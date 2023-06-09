@@ -1,2 +1,16 @@
 #!/bin/bash
-../ . find 0x00-shell_basics -name *.html -type f -newer alx-system_engineering-devops -exec cp -u -t alx-sytstem_engineering-devops {} +
+
+# Get the current working directory
+current_dir=$(pwd)
+
+# Move up one directory to the parent directory
+parent_dir=$(dirname "$current_dir")
+
+# Copy HTML files from current directory to parent directory if they don't exist or are newer
+echo "Copying HTML files to the parent directory..."
+for file in *.html; do
+    if [ ! -e "$parent_dir/$file" ] || [ "$file" -nt "$parent_dir/$file" ]; then
+        cp "$file" "$parent_dir/$file"
+    fi
+done
+echo "Copy complete!"
